@@ -18,15 +18,15 @@ $(document).ready(function() {
   });
   
   // load saved data from localStorage if any
-  $("#currenthour-9.description").val(localStorage.getItem("currenthour-9"));
-  $("#currenthour-10.description").val(localStorage.getItem("currenthour-10"));
-  $("#currenthour-11.description").val(localStorage.getItem("currenthour-11"));
-  $("#currenthour-12.description").val(localStorage.getItem("currenthour-12"));
-  $("#currenthour-13.description").val(localStorage.getItem("currenthour-13"));
-  $("#currenthour-14.description").val(localStorage.getItem("currenthour-14"));
-  $("#currenthour-15.description").val(localStorage.getItem("currenthour-15"));
-  $("#currenthour-16.description").val(localStorage.getItem("currenthour-16"));
-  $("#currenthour-17.description").val(localStorage.getItem("currenthour-17"));
+  $("#currenthour-9 .description").val(localStorage.getItem("currenthour-9"));
+  $("#currenthour-10 .description").val(localStorage.getItem("currenthour-10"));
+  $("#currenthour-11 .description").val(localStorage.getItem("currenthour-11"));
+  $("#currenthour-12 .description").val(localStorage.getItem("currenthour-12"));
+  $("#currenthour-13 .description").val(localStorage.getItem("currenthour-13"));
+  $("#currenthour-14 .description").val(localStorage.getItem("currenthour-14"));
+  $("#currenthour-15 .description").val(localStorage.getItem("currenthour-15"));
+  $("#currenthour-16 .description").val(localStorage.getItem("currenthour-16"));
+  $("#currenthour-17 .description").val(localStorage.getItem("currenthour-17"));
   
   function hourUpdater() {
     // get current number of hours
