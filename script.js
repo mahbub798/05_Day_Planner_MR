@@ -1,32 +1,54 @@
+$(document).ready(function() {
+  // display current day  and date on the top of the page
+  $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
-$(document).ready(function(){
-    // Display current day, month and date at the top of the page
-    $('#currentDay').text(moment().format('dddd, MMMM Do'));
-    var currentTime = moment().format('h A');
-    console.log('Current time is: ' +currentTime);
-    
-    //Set time span between 9 AM - 5 PM
-    $('.Hour').each(function(i){
-      $(this).text(moment().hour(i + 9).format('h A'))
-    });
-    //Provide work day hours in an array
-    var timeArr = ['9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM'];
+  //Update the hours block
+  hourUpdater();
 
-    $('.HourRow').each(function(i){
-      //Get index of current hour
-      var currentIndexOfGivenTimeArray = timeArr.indexOf(currentTime);
-      console.log('Index of current hour from provided time Array is: ' +currentIndexOfGivenTimeArray);
+  // set up interval to check if current time needs to be updated
+  var interval = setInterval(hourUpdater, 15000);
 
-      if(currentIndexOfGivenTimeArray > i){
-        //past and disabled
-
-      } else if(currentIndexOfGivenTimeArray === i){
-        //present
-
-      } else{
-        //future
-
+  // Eventlistener for save button clicks
+  $(".saveBtn").on("click", function() {
+    // get values
+    var value = $(this).siblings(".description").val();
+    var time = $(this).parent().attr("id");
+    // save in localStorage
+    localStorage.setItem(time, value);
+  });
+  
+  // load saved data from localStorage if any
+  $("#currenthour-9.description").val(localStorage.getItem("currenthour-9"));
+  $("#currenthour-10.description").val(localStorage.getItem("currenthour-10"));
+  $("#currenthour-11.description").val(localStorage.getItem("currenthour-11"));
+  $("#currenthour-12.description").val(localStorage.getItem("currenthour-12"));
+  $("#currenthour-13.description").val(localStorage.getItem("currenthour-13"));
+  $("#currenthour-14.description").val(localStorage.getItem("currenthour-14"));
+  $("#currenthour-15.description").val(localStorage.getItem("currenthour-15"));
+  $("#currenthour-16.description").val(localStorage.getItem("currenthour-16"));
+  $("#currenthour-17.description").val(localStorage.getItem("currenthour-17"));
+  
+  function hourUpdater() {
+    // get current number of hours
+    var currentHour = moment().hours();
+    // loop the time blocks
+    $(".time-block").each(function() {
+      var blockedHour = parseInt($(this).attr("id").split("-")[1]);
+      //console.log("blocked hour is: " + blockedHour);
+      //console.log("current hour is: "+ currentHour);
+      // check the time
+      if (blockedHour < currentHour) {
+        $(this).addClass("past");
+      } 
+      else if (blockedHour === currentHour) {
+        $(this).removeClass("past");
+        $(this).addClass("present");
+      } 
+      else {
+        $(this).removeClass("past");
+        $(this).removeClass("present");
+        $(this).addClass("future");
       }
     });
- 
+  }
 });
